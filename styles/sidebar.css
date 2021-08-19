@@ -1,0 +1,99 @@
+.sidebar {
+  flex: 0.4;
+  height: 100vh;
+  border-right: 2px solid rgba(252, 248, 248, 0.89);
+  max-width: 340px;
+}
+
+.header {
+  display: flex;
+  padding-top: 20px;
+
+  margin-left: 5px;
+  padding-bottom: 10px;
+  padding-right: 5px;
+  align-items: center;
+  border-bottom: 2px solid rgba(252, 248, 248, 0.89);
+}
+.headerleft {
+  flex: 0.5;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.Avatar {
+  cursor: pointer;
+  background-color: #4caf50 !important;
+}
+.headerright {
+  flex: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.icon {
+  font-size: 25px !important;
+  color: rgba(80, 49, 49, 0.966);
+  cursor: pointer;
+  
+}
+
+.icon:hover{
+
+ font-size: 29px !important;
+ color:black;
+}
+
+.searchbox {
+  margin: 0.8vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* border: 2px solid #bdbdbd; */
+  border-radius: 4rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.searchbox > input {
+  flex: 0.8;
+  font-size: 14px;
+  outline: none;
+  border: none;
+
+  text-transform: capitalize;
+}
+.search {
+  margin-left: 5px;
+}
+
+.chatlist {
+  border-top: 2px solid rgba(252, 248, 248, 0.89);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 2px solid rgba(252, 248, 248, 0.89);
+  
+}
+.chatlist>p{
+  flex: 0.9;
+    text-transform: capitalize;
+margin-left: 10px;
+font-size: 18px;
+/* background-color: wheat; */
+}
+.addicon{
+    flex: 0.3;
+    font-size: 40px !important;
+    color: rgba(80, 49, 49, 0.966) ;
+    cursor: pointer;
+}
+.addicon:hover{
+
+  font-size: 46px !important;
+  color:black;
+ }
+/* @media only screen and (max-width: 600px) {
+  body {
+  }
+} */

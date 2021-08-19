@@ -1,0 +1,45 @@
+
+.logincontainer{
+    width: 78vw;
+    height: 80vh;
+    margin: 0 auto;
+    margin-top: 3vw;
+    
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+   
+    flex-wrap: wrap;
+    
+  
+}
+.logo{
+width: 70%;
+
+height: 50%;
+
+
+}
+.logincontainer > a{
+    
+    font-size: 2vw;
+    text-decoration: none;
+    color: white;
+    background-color: #1db954;
+    padding: .8vw;
+    border-radius: 1.6rem;
+    width: fit-content;
+    text-align: center;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+    .logincontainer{
+        flex-direction: column;
+    }
+   .logincontainer>a{
+       font-size: 5vw;
+       padding: 4vw;
+   }
+  }
+ 

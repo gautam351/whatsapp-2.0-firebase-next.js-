@@ -1,0 +1,28 @@
+.displaychats{
+  
+    height: 69vh;
+overflow-y:scroll;
+
+}
+
+.individualchat {
+    /* border-top: 2px solid rgba(252, 248, 248, 0.89); */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* border-bottom: 2px solid rgba(252, 248, 248, 0.89); */
+    cursor: pointer;
+  }
+  .individualchat>p{
+    flex: 0.9;
+      text-transform: capitalize;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  
+  
+  }
+  
+
+ 
