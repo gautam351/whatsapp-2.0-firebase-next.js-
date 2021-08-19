@@ -34,15 +34,15 @@ function Chatbody() {
         .doc(location)
         .get()
         .then((doc) => {
-          setstate(doc.data().users[1]);
-          picurl(doc.data().users[1]);
+          setstate(doc?.data().users[1]);
+          picurl(doc?.data()?.users[1]);
         });
     };
 
     const picurl=async(nametemp)=>{
       await db.collection("users").doc(nametemp)?.get()
      .then((doc)=>{
-       setpic(doc.data());
+       setpic(doc?.data());
       //  settemppic(doc?.data()?.photourl);
      })
           
@@ -66,7 +66,7 @@ function Chatbody() {
     .doc(location)
     .collection("messages").orderBy('timestamp','asc').onSnapshot(snapshot=>{
     
-       setchatsdb(snapshot.docs);
+       setchatsdb(snapshot?.docs);
     //  console.log(snapshot.docs);
     
       })
@@ -133,9 +133,9 @@ function Chatbody() {
     <div className="Chatbodycontainer">
       <div className="bodyheader">
         <div className="bodyheaderleft">
-          <Avatar className="Avatar" alt={state}  src={pic?.photourl} />
+          <Avatar className="Avatar" alt={state?state:""}  src={pic?.photourl} />
  
-          <p>{state.substring(0,state.search('@'))}  </p>
+          <p>{state?.substring(0,state.search('@'))}  </p>
          
          
 
@@ -154,9 +154,9 @@ function Chatbody() {
      
       { 
        chatsdb.map(el=>(
-        el._delegate?._document?.data?.value.mapValue.fields.user.stringValue==user.email?
+        el?._delegate?._document?.data?.value.mapValue.fields.user.stringValue==user.email?
         <Messagechat  item={el._delegate?._document?.data?.value.mapValue.fields.message.stringValue} time={el._delegate?._document?.data?.value.mapValue.fields.timestamp.timestampValue}/>
-       :        <Messagechatl  item={el._delegate?._document?.data?.value.mapValue.fields.message.stringValue} time={el._delegate?._document?.data?.value.mapValue.fields.timestamp.timestampValue}/>
+       :        <Messagechatl  item={el?._delegate?._document?.data?.value.mapValue.fields.message.stringValue} time={el._delegate?._document?.data?.value.mapValue.fields.timestamp.timestampValue}/>
 
        ))
     

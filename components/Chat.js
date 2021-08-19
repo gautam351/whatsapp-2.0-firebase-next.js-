@@ -31,7 +31,7 @@ const [pic, setpic] = useState();
     <div className="individualchat" onClick={enterChat}>
       <Avatar
         className="Avatar"
-        alt={letter}
+        alt={letter?letter:""}
         src={pic?.photourl?pic?.photourl:"/static/images/avatar/1.jpg"} 
       />
       <p className="chatnames">{name.substring(0,name.search('@'))}</p>

@@ -95,7 +95,7 @@ function Sidebar() {
       {
         chatsSnapshot?.docs.map(el=>(
           el.data().users[0]==user.email?
-          <Chat name={el.data().users[1]} id={el.id}  />:console.log({user})
+          <Chat name={el.data().users[1]} id={el.id}  />:console.log()
         ))
        }
        
