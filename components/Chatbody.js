@@ -24,7 +24,7 @@ function Chatbody() {
   const [pic, setpic] = useState();
   
   
-  let location = window.location.href.substring(54);
+  let location = window.location.href.substring(37);
 
   
   useEffect(() => {
