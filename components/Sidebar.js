@@ -14,15 +14,8 @@ import Chat from "./Chat";
 import { Router } from "@material-ui/icons";
 import { useRouter } from "next/dist/client/router";
 
-
-
-
-
-
-
-
 function Sidebar() {
-  const router= useRouter();//next.js way to get a router--->in order to direct the user to desired selected eamil chat 
+  const router = useRouter(); //next.js way to get a router--->in order to direct the user to desired selected eamil chat
 
   const [user] = useAuthState(auth);
   const userchatref = db
@@ -32,21 +25,23 @@ function Sidebar() {
   const createchat = () => {
     let chatname = prompt("enter valid email of person you wanna connect");
     if (!chatname) return null;
-    chatname= chatname.toLowerCase();
+    chatname = chatname.toLowerCase();
     if (
       EmailValidator.validate(chatname) &&
       // !chatalreadyexisitcheck(chatname) &&
       chatname !== user.email
     ) {
       // add the chats in the db "chats" if it doesnt already exists
-      const s1=toString(user.email)+toString(chatname);
-      db.collection("chats").doc(user.email+chatname).set({
-        users: [user.email, chatname],
-      });
+      const s1 = toString(user.email) + toString(chatname);
+      db.collection("chats")
+        .doc(user.email + chatname)
+        .set({
+          users: [user.email, chatname],
+        });
     } else alert("Invalid/your own's Email..Try Again");
   };
 
-  const chatalreadyexisitcheck = (recipientEmail) => 
+  const chatalreadyexisitcheck = (recipientEmail) =>
     // this is gonna search the dstabase for that chatof recipientEmails....thiscould return either chat or undefined or null
     // so we need to convert everything into boolean either true or false..therefore !! is used
     !!chatsSnapshot?.docs.find(
@@ -54,16 +49,11 @@ function Sidebar() {
         chats.data().users.find((user) => user === recipientEmail)?.length > 0
     );
 
-
   return (
     <div className="sidebar">
       <div className="header">
         <div className="headerleft">
-          <Avatar
-            className="Avatar"
-            alt="P"
-            src={user.photoURL}
-          />
+          <Avatar className="Avatar" alt="P" src={user.photoURL} />
         </div>
         <div className="headerright">
           <abbr title="">
@@ -89,21 +79,16 @@ function Sidebar() {
         <p>chat</p>
       </div>
       {/* now we are going to pull all the 1-1 chat list present in the database and display it */}
-    
-   
+
       <div className="displaychats">
-      {
-        chatsSnapshot?.docs.map(el=>(
-          el.data().users[0]==user.email?
-          <Chat name={el.data().users[1]} id={el.id}  />:console.log()
-        ))
-       }
-       
+        {chatsSnapshot?.docs.map((el) =>
+          el.data().users[0] == user.email ? (
+            <Chat name={el.data().users[1]} id={el.id} />
+          ) : (
+            console.log()
+          )
+        )}
       </div>
-       
-     
-     
-   
     </div>
   );
 }

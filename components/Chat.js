@@ -6,35 +6,34 @@ import { db } from "../firebase";
 function Chat({ name, id }) {
   const router = useRouter();
   const letter = name.substring(0, 1).toUpperCase();
-const [pic, setpic] = useState();
+  const [pic, setpic] = useState();
   const enterChat = () => {
-
     router.push(`/chat/${id}`);
 
     //redirecting the page to chat page
   };
 
   useEffect(() => {
-   
-    const picurl=async()=>{
- await db.collection("users").doc(name).get()
-.then((doc)=>{
-  setpic(doc.data());
-})
-     
-      }
+    const picurl = async () => {
+      await db
+        .collection("users")
+        .doc(name)
+        .get()
+        .then((doc) => {
+          setpic(doc.data());
+        });
+    };
     picurl();
-
-  }, [])
+  }, []);
 
   return (
     <div className="individualchat" onClick={enterChat}>
       <Avatar
         className="Avatar"
-        alt={letter?letter:""}
-        src={pic?.photourl?pic?.photourl:"/static/images/avatar/1.jpg"} 
+        alt={letter ? letter : ""}
+        src={pic?.photourl ? pic?.photourl : "/static/images/avatar/1.jpg"}
       />
-      <p className="chatnames">{name.substring(0,name.search('@'))}</p>
+      <p className="chatnames">{name.substring(0, name.search("@"))}</p>
     </div>
   );
 }
@@ -45,7 +44,7 @@ export default Chat;
 // export async function getServerSideProps(context) {
 //   const ref = db.collection("chats").doc(context.query.id);
 
-  // prep the msges ons server
+// prep the msges ons server
 
 //   const messagesRes = await ref
 //     .collection("messages")
