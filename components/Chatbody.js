@@ -10,9 +10,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import firebase from "firebase";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { useRef } from "react";
-import { Message, VoiceChat } from "@material-ui/icons";
+
 import Messagechat from "./Messagechat";
 import Messagechatl from "./Messagechatl";
+import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
+const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false });
+
+
 
 // speech Recorgnition setup
 
@@ -29,7 +34,8 @@ function Chatbody() {
   const [chatsdb, setchatsdb] = useState([]);
   const [temppic, settemppic] = useState();
   const [pic, setpic] = useState();
-
+const [emojie, setemojie] = useState(0)
+const [chosenEmoji, setChosenEmoji] = useState(null);
   let location = window.location.href.substring(37);
 
   // let location = window.location.href.substring(27);
@@ -42,8 +48,10 @@ function Chatbody() {
     mic.continuous = true;
     // mic.interimResults=true;
     mic.lang = "en-IN";
+    
   }, []);
 
+ 
   useEffect(() => {
     const getdata = async () => {
       await db
@@ -63,11 +71,12 @@ function Chatbody() {
         ?.get()
         .then((doc) => {
           setpic(doc?.data());
-          //  settemppic(doc?.data()?.photourl);
+         
         });
     };
 
     getdata();
+    setemojie(0);
   }, [location]);
 
   useEffect(() => {
@@ -81,15 +90,7 @@ function Chatbody() {
           //  console.log(snapshot.docs);
         });
 
-      // db.
-      // collection("chats")
-      // .doc(location)
-      // .collection("messages").orderBy('timestamp','asc').get()
-      // .then(el=>{
-      //   setchatsdb(el.docs);
-      // })
-
-      //  console.log(chatsdb);
+     
     };
     getchatfromdb();
 
@@ -121,12 +122,29 @@ function Chatbody() {
     setmsgbox(" ");
 
     deel.current.scrollIntoView({ behavior: "smooth" });
+    setemojie(0);
   };
 
   const setfun = (event) => {
     setmsgbox(event.target.value);
   };
 
+
+  const showemojie=()=>{
+   if(emojie==0)setemojie(1);
+   else setemojie(0);
+  //  console.log(emojie);     
+  }
+     
+
+  
+
+  const onEmojiClick = (event, emojiObject) => {
+    inutref.current.focus();
+    inutref.current.value =
+      " " + inutref.current.value + " " + emojiObject.emoji + " ";
+    setmsgbox(" " + msgbox + " " + emojiObject.emoji + " ");
+  };
   // speech recorgnition
   let status = 0;
 
@@ -160,7 +178,8 @@ function Chatbody() {
 
   
   };
-
+  
+ 
   return (
     <div className="Chatbodycontainer">
       <div className="bodyheader">
@@ -215,15 +234,20 @@ function Chatbody() {
         )}
 
         {<Messagechat />}
+       {emojie? <Picker onEmojiClick={onEmojiClick} />:null}
+       
         <div ref={deel}></div>
       </div>
 
       <form action="">
         <div className="chattype">
-          <div className="emojie">
-            <InsertEmoticonIcon className="icon emoji" />{" "}
+     
+          <div className="emojie"  onClick={showemojie}  >
+            <InsertEmoticonIcon className="icon emoji"  />{" "}
+           
+         
           </div>
-          <div className="inputtext">
+          <div className="inputtext" >
             <input
               type="text"
               ref={inutref}
